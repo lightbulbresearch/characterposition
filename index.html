@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Character Position Tracker | Find Text Position</title>
+    <meta name="description" content="Track character position in text with our easy-to-use tool. Get line number, character position, and absolute position instantly.">
+    <meta name="keywords" content="character position, text tracker, line number, cursor position">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+        }
+        #textArea {
+            width: 80%;
+            height: 300px;
+            margin-bottom: 20px;
+            font-size: 16px;
+        }
+        #positionInfo {
+            font-size: 18px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <h1>Character Position</h1>
+    <textarea id="textArea" placeholder="Paste or type your text here..."></textarea>
+    <div id="positionInfo">Click in the text area to see position information.</div>
+
+    <script>
+        const textArea = document.getElementById('textArea');
+        const positionInfo = document.getElementById('positionInfo');
+
+        textArea.addEventListener('click', updatePosition);
+        textArea.addEventListener('keyup', updatePosition);
+
+        function updatePosition() {
+            const cursorPosition = textArea.selectionStart;
+            const text = textArea.value.substring(0, cursorPosition);
+            const lines = text.split('\n');
+            const currentLine = lines.length;
+            const characterInLine = lines[lines.length - 1].length + 1;
+
+            positionInfo.textContent = `Line: ${currentLine}, Character in line: ${characterInLine}, Absolute position: ${cursorPosition + 1}`;
+        }
+    </script>
+</body>
+</html>
